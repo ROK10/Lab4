@@ -1,6 +1,4 @@
-/**
- * Created by chaika on 02.02.16.
- */
+
 var Templates = require('../Templates');
 
 //Перелік розмірів піци

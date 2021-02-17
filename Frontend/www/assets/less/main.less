@@ -3,26 +3,32 @@
 @import "pizza/pizza-card";
 @import "top";
 @import "right";
-button:focus {
-  outline: none;
+button:active, button:focus {
+  outline: none !important;
 }
+button::-moz-focus-inner {
+  border: 0 !important;
 
 .container {
-  padding-right: @RightColumnWidth;
-  margin-top: @TopRowHeight;
+  background-color: #fafff3;
+  margin: 0;
+  padding-right: @RightColumnWidth + 15px;
+  padding-top: @TopRowHeight + 15px;
   height: 100%;
+  width: 100%;
+}
 }
 
 .inner-container {
   max-width: 1000px;
-  padding-top: 15px;
+  padding: 0;
   margin: auto;
+  top: 100px;
   height: 100%;
-  overflow-y: scroll;
 }
 
 .right-column {
-  background: #ededed;
+  background: #efefef;
   width: @RightColumnWidth;
   height: 100%;
   position: fixed;
@@ -59,7 +65,6 @@ button:focus {
   .title {
     font-size: 15px;
     border-bottom: 2px dotted #d16301;
-    margin-bottom: 7px;
     padding-bottom: 3px;
     margin-bottom: 5px;
   }
@@ -71,4 +76,48 @@ button:focus {
   background-color: #fff;
   text-align: center;
   font-size: 15px;
+}
+
+.all-title {
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: xx-large;
+
+  .all-count {
+    margin-left: @distance;
+  }
+}
+
+.all-pizza {
+  text-align: center;
+  margin-bottom: @distance*2;
+  .pizza-types {
+    display: inline-block;
+  }
+  .nav-pills > li > a {
+    color: @color;
+  }
+  .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: white;
+    background-color: @color;
+  }
+}
+
+@media (max-width: 800px) {
+  .right-column {
+    width: 290px;
+  }
+  .top-row, #two-lines{
+      right: 290px;
+  }
+  // TODO: !!!!!
+  .order-label {
+    .title {
+      font-size: 10px;
+    }
+  }
+}
+
+.orange {
+  background-color: #EA862E;
 }

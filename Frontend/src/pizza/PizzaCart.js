@@ -1,6 +1,6 @@
 
 var Templates = require('../Templates');
-
+var LocalStorage = require('./LocalStorage');
 //Перелік розмірів піци
 var PizzaSize = {
     Big: "big_size",
@@ -13,32 +13,57 @@ var Cart = [];
 //HTML едемент куди будуть додаватися піци
 var $cart = $("#cart");
 
-function addToCart(pizza, size) {
-    //Додавання однієї піци в кошик покупок
-
-    //Приклад реалізації, можна робити будь-яким іншим способом
-    Cart.push({
-        pizza: pizza,
-        size: size,
-        quantity: 1
+//Очистити кошик покупок
+function clean() {
+    Cart = [];
+    updateCart();
+}
+    function addToCart(pizza, size) {
+    var bool = true;
+    Cart.forEach(function (pizza_cart) {
+        if(pizza === pizza_cart.pizza && size === pizza_cart.size){
+            pizza_cart.quantity++;
+            bool = false;
+        }
     });
-
+    if(bool) {
+        Cart.push({
+            pizza: pizza,
+            size: size,
+            quantity: 1
+        });
+    }    
     //Оновити вміст кошика на сторінці
     updateCart();
 }
-
+function sum(){
+    var res = 0;
+    Cart.forEach(function (pizza_cart) {
+         res += pizza_cart.pizza[pizza_cart.size].price*pizza_cart.quantity;
+    });
+    return res;
+}
 function removeFromCart(cart_item) {
     //Видалити піцу з кошика
-    //TODO: треба зробити
-
-    //Після видалення оновити відображення
+    var temp = [];
+    var n = 0;
+    for(var i=0; i<Cart.length; i++){
+        if(Cart.indexOf(cart_item) !== i) {
+            temp[n] = Cart[i];
+            n++;
+        }
+    }
+    Cart = [];
+    Cart = temp;
     updateCart();
 }
 
 function initialiseCart() {
     //Фукнція віпрацьвуватиме при завантаженні сторінки
-    //Тут можна наприклад, зчитати вміст корзини який збережено в Local Storage то показати його
-    //TODO: ...
+    var saved = LocalStorage.get('cart');
+    if(saved) {
+        Cart = saved;
+    }
 
     updateCart();
 }
@@ -50,9 +75,9 @@ function getPizzaInCart() {
 
 function updateCart() {
     //Функція викликається при зміні вмісту кошика
-    //Тут можна наприклад показати оновлений кошик на екрані та зберегти вміт кошика в Local Storage
-
-    //Очищаємо старі піци в кошику
+    $(".order-label .count").text(Cart.length);
+    $('#count-sum').text(sum() + " грн.");
+    LocalStorage.set("cart", Cart);
     $cart.html("");
 
     //Онволення однієї піци
@@ -68,7 +93,23 @@ function updateCart() {
             //Оновлюємо відображення
             updateCart();
         });
+$node.find(".minus").click(function () {
+            if (cart_item.quantity === 1) {
+                removeFromCart(cart_item);
+            } else {
+                //Зменшуємо кількість замовлених піц
+                cart_item.quantity -= 1;
+            }
 
+            //Оновлюємо відображення
+            updateCart();
+        });
+        $node.find(".delete").click(function () {
+            removeFromCart(cart_item);
+
+            //Оновлюємо відображення
+            updateCart();
+        });
         $cart.append($node);
     }
 
@@ -78,7 +119,7 @@ function updateCart() {
 
 exports.removeFromCart = removeFromCart;
 exports.addToCart = addToCart;
-
+exports.clean = clean;
 exports.getPizzaInCart = getPizzaInCart;
 exports.initialiseCart = initialiseCart;
 

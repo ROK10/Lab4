@@ -1,5 +1,6 @@
 @distance: 7px;
 @TopRowHeight: 90px;
+@RightColumnWidth: 320px;
 
 #kma {
   background-color: #EA862E;
@@ -31,7 +32,7 @@
   display: inline-block;
   position: fixed;
   top: 0;
-  right: 300px;
+  right: @RightColumnWidth;
   left: 100px+@distance*2;
   padding: 15px @distance*2 0 @distance;
   height: @TopRowHeight;

@@ -1,4 +1,4 @@
-@RightColumnWidth: 300px;
+@RightColumnWidth: 320px;
 @BottomHeight: 100px;
 @TopHeight: 90px;
 @color: #EA862E;
@@ -20,13 +20,6 @@
       font-size: 18px;
       font-weight: bold;
     }
-    .count {
-      padding: 5px 7px 4px 7px;
-      background-color: @color;
-      border-radius: 50%;
-      color: white;
-      text-align: center;
-    }
   }
 
   button {
@@ -45,10 +38,7 @@
   top: @TopHeight;
   bottom: @BottomHeight;
   padding: 10px;
-  margin-top: @TopHeight + 10px;
-  padding-bottom: @BottomHeight  + 10px;
   width: 100%;
-  height: 100%;
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
@@ -58,6 +48,7 @@
     height: 120px;
     padding: 20px 61px 10px 24px;
     overflow: hidden;
+    position: relative;
     .order-name-size {
       line-height: 16px;
       font-size: 20px;
@@ -81,21 +72,14 @@
         color: @color;
         margin-left: 13px;
       }
-      i {
-        font-weight: 400;
-        line-height: 1;
-        position: relative;
-       top: 1px;
-        display: inline-block;
-      }
-      .img-pizza {
-        position: absolute;
-        right: -48px;
-        top: 15px;
-        border-radius: 50% 0 0 50%;
-        max-height: 96px;
-        max-width: 96px;
-      }
+    }
+    .img-pizza {
+      position: absolute;
+      right: -48px;
+      top: 15px;
+      border-radius: 50% 0 0 50%;
+      max-height: 96px;
+      max-width: 96px;
     }
   }
 }

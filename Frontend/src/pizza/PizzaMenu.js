@@ -1,27 +1,25 @@
-
 var Templates = require('../Templates');
 var PizzaCart = require('./PizzaCart');
-var Pizza_List = require('../Pizza_List');
+var API = require("../API");
+var Pizza_List = {};
 
-//HTML едемент куди будуть додаватися піци
 var $pizza_list = $("#pizza_list");
 
 function showPizzaList(list) {
-    //Очищаємо старі піци в кошику
     $pizza_list.html("");
 
-    //Онволення однієї піци
     function showOnePizza(pizza) {
         var html_code = Templates.PizzaMenu_OneItem({pizza: pizza});
 
         var $node = $(html_code);
-
         $node.find(".buy-small").click(function(){
             PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
         });
         $node.find(".buy-big").click(function(){
             PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
         });
+
+
         $pizza_list.append($node);
     }
 
@@ -44,7 +42,6 @@ function filterPizza(filter) {
         setTitle("Усі піци");
         $(".all-count").text("8");
     } else {
-        //Масив куди потраплять піци, які треба показати
         var pizza_shown = [];
         if (filter === PizzaFilter.Meat) {
             Pizza_List.forEach(function (pizza) {
@@ -87,14 +84,20 @@ function filterPizza(filter) {
             setTitle("Вегетеріанські піци");
         }
         $(".all-count").text(pizza_shown.length);
-        //Показати відфільтровані піци
         showPizzaList(pizza_shown);
     }
+
 }
 
 function initialiseMenu() {
-    //Показуємо усі піци
-    showPizzaList(Pizza_List);
+    API.getPizzaList(function (err, list) {
+        if(err){
+            alert(err.message);
+        } else {
+            Pizza_List = list;
+            showPizzaList(Pizza_List);
+        }
+    });
 }
 
 exports.filterPizza = filterPizza;

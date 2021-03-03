@@ -34,8 +34,8 @@ function getIngredientsArray(pizza) {
                 %>
                 <% if(pizza.small_size) { %>
                 <div class="<%=	getPizzaColumn(pizza)%> small-pz">
-                    <div><img class="" src="../www/assets/images/size-icon.svg"><span> <%= pizza.small_size.size%></span></div>
-                    <div><img class="" src="../www/assets/images/weight.svg"><span> <%= pizza.small_size.weight%></span></div>
+                    <div><img class="" src="assets/images/size-icon.svg"><span> <%= pizza.small_size.size%></span></div>
+                    <div><img class="" src="assets/images/weight.svg"><span> <%= pizza.small_size.weight%></span></div>
                     <div class="price"><h2><%= pizza.small_size.price%></h2></div>
                     <div>грн.</div>
                     <button class="btn btn-warning buy-small">Купити</button>
@@ -43,8 +43,8 @@ function getIngredientsArray(pizza) {
                 <% } %>
                 <% if(pizza.big_size) { %>
                 <div class="<%=	getPizzaColumn(pizza)%> big-pz">
-                    <div><img class="" src="../www/assets/images/size-icon.svg"><span> <%= pizza.big_size.size%></span></div>
-                    <div><img class="" src="../www/assets/images/weight.svg"><span> <%= pizza.big_size.weight%></span></div>
+                    <div><img class="" src="assets/images/size-icon.svg"><span> <%= pizza.big_size.size%></span></div>
+                    <div><img class="" src="assets/images/weight.svg"><span> <%= pizza.big_size.weight%></span></div>
                     <div class="price"><h2><%= pizza.big_size.price%></h2></div>
                     <div>грн.</div>
                     <button class="btn btn-warning buy-big">Купити</button>

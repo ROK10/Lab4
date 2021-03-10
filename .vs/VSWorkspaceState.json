@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Backend",
+    "\\Backend\\data",
+    "\\Backend\\views",
+    "\\Backend\\views\\common",
+    "\\Frontend",
+    "\\Frontend\\src",
+    "\\Frontend\\src\\pizza",
+    "\\Frontend\\www"
+  ],
+  "SelectedNode": "\\Frontend\\www\\index.html",
+  "PreviewInSolutionExplorer": false
+}
